@@ -19,13 +19,12 @@ var jsonWrite = function (res, ret) {
   }
 }
 
-// 增加用户接口
-//router.post('/addUser', (req, res) => {
-router.post('/addReader', (req, res) => {
-  var sql = $sql.reader.add
+
+router.post('/addBook', (req, res) => {
+  var sql = $sql.book.add
   var params = req.body
   console.log(params)
-  conn.query(sql, [params.name], function (err, result) {
+  conn.query(sql, [params.name, params.author, params.stock], function (err, result) {
     if (err) {
       console.log(err)
     }
@@ -35,22 +34,8 @@ router.post('/addReader', (req, res) => {
   })
 })
 
-router.post('/cancelReader', (req, res) => {
-  var sql = $sql.reader.delete
-  var params = req.body
-  console.log(params)
-  conn.query(sql, [params.name], function (err, result) {
-    if (err) {
-      console.log(err)
-    }
-    if (result) {
-      jsonWrite(res, result)
-    }
-  })
-})
-
-router.get('/searchReader', (req, res) => {
-  var sql = $sql.reader.search
+router.get('/searchBook', (req, res) => {
+  var sql = $sql.book.search
   var params = req.query
   console.log(params)
   conn.query(sql, [params.name], function (err, result) {
@@ -63,5 +48,6 @@ router.get('/searchReader', (req, res) => {
     }
   })
 })
+
 
 module.exports = router
