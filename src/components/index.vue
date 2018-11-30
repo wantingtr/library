@@ -37,7 +37,7 @@
                   <el-menu-item index="2-1">录入书籍</el-menu-item>
                 </router-link>
                 <router-link to='/book/searchBookInfo'>
-                  <el-menu-item index="2-2">查询书籍</el-menu-item>
+                  <el-menu-item index="2-2">查询书籍信息</el-menu-item>
                 </router-link>
                 <router-link to='/book/searchBookLoan'>
                   <el-menu-item index="2-3">查询图书借阅信息</el-menu-item>

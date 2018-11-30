@@ -11,10 +11,9 @@
             <span>读者证信息</span>
         </div>
         <div class="text item">
-            <div class="itemInfo">读者姓名: {{ this.data[0].name }}</div>
-            <div class="itemInfo">借阅书籍1: {{ this.data[0].lendBook1 }}</div>
-            <div class="itemInfo">借阅书籍2: {{ this.data[0].lendBook2 }}</div>
-            <div class="itemInfo">借阅书籍3: {{ this.data[0].lendBook3 }}</div>
+            <div class="itemInfo">读者姓名: {{ this.data[0].readerName }}</div>
+            <div class="itemInfo">借阅总次数: {{ this.data[0].borrowNum }}</div>
+            <div class="itemInfo">未交罚金: {{ this.data[0].fee }}</div>
         </div>
         </el-card>
     </div>
@@ -26,7 +25,7 @@ import axios from 'axios'
 export default {
     data () {
         return {
-            name: name,
+            name: '',
             data: {},
             flag: false
         }

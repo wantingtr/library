@@ -45,4 +45,7 @@ export default {
 </script>
 
 <style>
+.input{
+    width: 30%;
+}
 </style>

@@ -19,8 +19,7 @@ var jsonWrite = function (res, ret) {
   }
 }
 
-// 增加用户接口
-//router.post('/addUser', (req, res) => {
+// 用户接口
 router.post('/addReader', (req, res) => {
   var sql = $sql.reader.add
   var params = req.body
@@ -63,5 +62,21 @@ router.get('/searchReader', (req, res) => {
     }
   })
 })
+
+router.get('/searchReaderID', (req, res) => {
+  var sql = $sql.reader.searchID
+  var params = req.query
+  console.log(params)
+  conn.query(sql, [params.readerName], function (err, result) {
+    if (err) {
+      console.log(err)
+    }
+    if (result) {
+      console.log(result)
+      res.send(result)
+    }
+  })
+})
+
 
 module.exports = router

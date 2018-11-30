@@ -1,5 +1,6 @@
 const userApi = require('./api/userApi')
 const bookApi = require('./api/bookApi')
+const loanApi = require('./api/loanApi')
 const fs = require('fs')
 const path = require('path')
 const bodyParser = require('body-parser')
@@ -14,6 +15,7 @@ app.use(bodyParser.urlencoded({
 // 后端api路由
 app.use('/api/reader', userApi)
 app.use('/api/book', bookApi)
+app.use('/api/borrow', loanApi)
 
 // 监听端口
 app.listen(3000);

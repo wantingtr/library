@@ -4,6 +4,7 @@ module.exports = {
         user: 'root',
         password: 'Wantingtr123',
         database: 'library',
-        port: '3306'
+        port: '3306',
+        multipleStatements: true
     }
 }

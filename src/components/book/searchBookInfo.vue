@@ -11,7 +11,7 @@
             <span>书籍信息</span>
         </div>
         <div class="text item">
-            <div class="itemInfo">书籍名: {{ this.data[0].name }}</div>
+            <div class="itemInfo">书籍名: {{ this.data[0].bookName }}</div>
             <div class="itemInfo">作者: {{ this.data[0].author }}</div>
             <div class="itemInfo">当前库存: {{ this.data[0].stock }}</div>
             <div class="itemInfo">被借阅次数: {{ this.data[0].lendNum }}</div>

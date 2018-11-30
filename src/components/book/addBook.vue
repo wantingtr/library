@@ -31,7 +31,7 @@ export default {
         stock: stock
       }).then(function (response) {
         console.log(response)
-        alert('成功录入' + name)
+        alert('成功录入《 ' + name + '》')
       }).catch(function (error) {
         console.log(error)
       })
