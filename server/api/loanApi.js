@@ -66,7 +66,7 @@ router.get('/getexpectDate', (req, res) => {
   var sql = $sql.borrow.getexpectDate
   var params = req.query
   console.log(params)
-  conn.query(sql, [params.bookID], function (err, result) {
+  conn.query(sql, [params.readerID, params.bookID], function (err, result) {
     if (err) {
       console.log(err)
     }

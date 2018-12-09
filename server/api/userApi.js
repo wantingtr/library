@@ -63,6 +63,21 @@ router.get('/searchReader', (req, res) => {
   })
 })
 
+router.get('/searchFee', (req, res) => {
+  var sql = $sql.reader.searchFee
+  var params = req.query
+  console.log(params)
+  conn.query(sql, [params.name], function (err, result) {
+    if (err) {
+      console.log(err)
+    }
+    if (result) {
+      console.log(result)
+      res.send(result)
+    }
+  })
+})
+
 router.get('/searchReaderID', (req, res) => {
   var sql = $sql.reader.searchID
   var params = req.query

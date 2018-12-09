@@ -64,6 +64,21 @@ router.get('/searchBook', (req, res) => {
   })
 })
 
+router.get('/getALLBook', (req, res) => {
+  var sql = $sql.book.getAll
+  var params = req.query
+  console.log(params)
+  conn.query(sql, function (err, result) {
+    if (err) {
+      console.log(err)
+    }
+    if (result) {
+      console.log(result)
+      res.send(result)
+    }
+  })
+})
+
 router.get('/searchBookID', (req, res) => {
   var sql = $sql.book.searchBookID
   var params = req.query

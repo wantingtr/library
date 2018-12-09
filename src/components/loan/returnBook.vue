@@ -4,7 +4,12 @@
     <div class="inputInfo">
       <el-input v-model="readerName" placeholder="请输入您的姓名" class="input"></el-input>
       <el-input v-model="bookName" placeholder="请输入所借书籍" class="input"></el-input>
-      <el-input v-model="returnDate" placeholder="请输入归还时间" class="input"></el-input>
+      <el-date-picker
+        v-model="returnDate"
+        type="date"
+        placeholder="选择日期"
+        class="input">
+      </el-date-picker>
     </div>
     <el-button @click.native="returnBook">归还书籍</el-button>
   </div>
@@ -17,14 +22,24 @@ export default {
     return {
       readerName: '',
       bookName:'',
-      returnDate: 0 ,//借出时间
+      returnDate: '' ,//借出时间
       readerID: 0,
       bookID: 0,
-      expectReturnDate: 0,
-      fee: 0
+      expectReturnDate: '',
+      fee: 0,
     }
   },
+  mounted: function(){
+    this.returnDate = new Date();
+  },
   methods: {
+    fmtDate(obj){
+      var date =  new Date(obj);
+      var y = 1900+date.getYear();
+      var m = "0"+(date.getMonth()+1);
+      var d = "0"+date.getDate();
+      return y+"-"+m.substring(m.length-2,m.length)+"-"+d.substring(d.length-2,d.length);
+    },
     //获取姓名和书籍ID
     //bookTable库存+1
     //获取期望归还时间
@@ -41,13 +56,16 @@ export default {
     },
     getexpectDate() {
       var bookID = this.bookID
+      var readerID = this.readerID
       axios.get('api/borrow/getexpectDate', {
         params: {
+          readerID: readerID,
           bookID: bookID
         }
       }).then((response) => {
-        console.log('getexpectDate')
+        console.log(response)
         this.expectReturnDate = response.data[0].expectReturnDate
+        console.log(this.expectReturnDate)
         this.return()
         //更新return表
       })
@@ -65,8 +83,12 @@ export default {
       var expectReturnDate = this.expectReturnDate
       var bookID = this.bookID
       var readerID = this.readerID
-      var returnDate = this.returnDate
-      var feePaying = (this.returnDate - this.expectReturnDate) * 2
+      var returnDate = this.$options.methods.fmtDate(this.returnDate)
+      var feePaying = 0
+      if (expectReturnDate < returnDate) {
+        var fee = (this.returnDate - this.expectReturnDate) * 2
+      }
+      this.fee= feePaying
       axios.post('api/borrow/returnBook', {
         readerID : readerID,
         bookID : bookID,
@@ -75,7 +97,7 @@ export default {
         feePaying: feePaying
       }).then((response) => {
         console.log('还书成功')
-        alert('您已成功归还《' + bookName + '》，产生欠款金额为' + feepaying +'元')
+        alert('您已成功归还《' + this.bookName + '》，产生欠款金额为' + this.fee +'元')
       })
     },
     searchReader() {
@@ -117,8 +139,18 @@ export default {
     height: 70px;
     width: 40%;
 }
+.data{
+  line-height: 70px;
+}
 .el-input{
     display: flex;
-    margin: auto;
+    margin: auto auto;
+}
+.el-input__icon{
+    position: absolute;
+    height: 0;
+}
+.el-date-editor.el-input{
+  width: 445.5px;
 }
 </style>
